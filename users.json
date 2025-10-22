@@ -1,0 +1,20 @@
+[
+  {
+    "username": "admin",
+    "email": "admin@fittrack.com",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "username": "user1",
+    "email": "user1@fittrack.com",
+    "password": "password123",
+    "role": "user"
+  },
+  {
+    "username": "user2",
+    "email": "user2@fittrack.com",
+    "password": "fitlife123",
+    "role": "user"
+  }
+]
