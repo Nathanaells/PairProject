@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Tracker - Home</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #03A9F4;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .container {
+      width: 80%;
+      margin: 30px auto;
+    }
+
+    .profile-card, .notes {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .notes ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .actions {
+      text-align: center;
+    }
+
+    .btn {
+      background-color: #03A9F4;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background-color: #43a047;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1>Welcome, Nathanael 👋</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Logout</a></li>
+        <!-- <li><a href="/login">Login</a></li> -->
+        <!-- <li><a href="/register">Register</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Profil -->
+    <section class="profile-card">
+      <h2>Profile</h2>
+      <p><strong>Nama:</strong> Nathanael Sinaga</p>
+      <p><strong>Usia:</strong> 24 tahun</p>
+      <p><strong>Berat Badan:</strong> 65 kg</p>
+      <p><strong>Tinggi Badan:</strong> 175 cm</p>
+    </section>
+
+    <!-- Catatan Harian -->
+    <section class="notes">
+      <h2>Catatan Harian</h2>
+      <ul>
+        <li><strong>22 Oktober 2025:</strong> Olahraga pagi selama 30 menit.</li>
+        <li><strong>21 Oktober 2025:</strong> Makan siang sehat dengan salad dan ayam rebus.</li>
+        <li><strong>20 Oktober 2025:</strong> Tidur cukup 8 jam, bangun dengan segar.</li>
+      </ul>
+    </section>
+
+    <!-- Tombol Navigasi -->
+    <section class="actions">
+      <a href="/healthrecords" class="btn">Lihat Health Record</a>
+      <a href="/activities" class="btn">Lihat Activity</a>
+    </section>
+  </main>
+
+</body>
+</html>

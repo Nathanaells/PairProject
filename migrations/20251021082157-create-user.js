@@ -9,11 +9,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      username: {
+        allowNull:false,
+        type: Sequelize.STRING
+      },
       email: {
         allowNull:false,
         type: Sequelize.STRING
       },
-      passsword: {
+      password: {
         allowNull:false,
         type: Sequelize.STRING
       },
