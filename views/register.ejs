@@ -109,6 +109,16 @@ body {
         padding: 40px 15px 15px 15px;
     }
 }
+
+
+.error{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: red;
+    padding: 10px 5px;
+   
+}
   </style>
 </head>
 <body>
@@ -117,6 +127,16 @@ body {
         <div class="logo">
             <img src="https://icon-library.com/images/running-icon-16_111118.png" alt="refresh">
         </div>
+        <% if (errors) { %>
+            <div class="error">
+                <%= errors %>
+            </div>
+        <% } %>
+        <% if (error) { %>
+            <div class="error">
+                <%= error %>
+            </div>
+        <% } %>
         <div class="text-center mt-4 name">
             Routiner
         </div>

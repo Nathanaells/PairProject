@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Profil - Health Tracker</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #03A9F4;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .container {
+      width: 80%;
+      margin: 30px auto;
+    }
+
+    .profile-form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #03A9F4;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    input, select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #03A9F4;
+      box-shadow: 0 0 4px rgba(3,169,244,0.4);
+    }
+
+    .btn {
+      background-color: #03A9F4;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 150px;
+      align-self: center;
+    }
+
+    .btn:hover {
+      background-color: #0288D1;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #03A9F4;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <h1>Buat Profil👤</h1>
+    <nav>
+      <ul>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="profile-form">
+      <h2>Isi Data Profil Anda</h2>
+      <% if (errors) { %>
+        <% errors = errors.split(',') %>
+        <% errors.join("") %>
+        
+        <% errors.forEach(el => { %>
+         <h4 style="color: red; text-align: center;"><%= el %></h3> 
+        <% }) %>
+    <% } %>
+      <form action="/home/addProfile" method="POST">
+        <label for="age">Usia (tahun)</label>
+        <input type="number" name="age" placeholder="Contoh: 24">
+
+        <label for="heigth">Tinggi Badan (cm)</label>
+        <input type="number" name="heigth" placeholder="Contoh: 175">
+
+        <label for="weigth">Berat Badan (kg)</label>
+        <input type="number" name="weigth" placeholder="Contoh: 65">
+
+        <label for="bloodType">Golongan Darah</label>
+
+        <% const bloodType = ["A", "B", "AB", "O"] %>
+        <select name="bloodType">
+            <option selected disabled>--Blood Type--</option>
+            <% bloodType.forEach(el => { %>
+             <option value="<%= el %>"><%= el %></option>
+            <% }) %>
+        </select>
+        <button type="submit" class="btn">Simpan Profil</button>
+      </form>
+
+      <div class="back-link">
+        <a href="/home/<%= userId %>">← Kembali ke Beranda</a>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

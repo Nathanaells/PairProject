@@ -74,46 +74,117 @@
     .btn:hover {
       background-color: #43a047;
     }
+
+    table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #03A9F4;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+tr:hover {
+  background-color: #f1f9ff;
+}
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
+
   <header class="navbar">
-    <h1>Welcome, Nathanael 👋</h1>
+    <h1>Selamat Datang <%= data.username %> 👋</h1>
     <nav>
       <ul>
-        <li><a href="#">Logout</a></li>
-        <!-- <li><a href="/login">Login</a></li> -->
-        <!-- <li><a href="/register">Register</a></li> -->
+        <li><a href="/logout">Logout</a></li>
       </ul>
     </nav>
   </header>
+  <% if (msg) { %>
+     <h4 style="color: red; text-align: center;">Catatan <%= msg %> telah dihapus </h4>
+<% } %>
 
   <main class="container">
-    <!-- Profil -->
     <section class="profile-card">
-      <h2>Profile</h2>
-      <p><strong>Nama:</strong> Nathanael Sinaga</p>
-      <p><strong>Usia:</strong> 24 tahun</p>
-      <p><strong>Berat Badan:</strong> 65 kg</p>
-      <p><strong>Tinggi Badan:</strong> 175 cm</p>
+      <% if (data.Profile) { %>
+        <h2>Profile</h2>
+        <p><strong>Nama:</strong> <%= data.username %></p>
+        <p><strong>Usia:</strong> <%= setYear(data.Profile.age) %></p>
+        <p><strong>Berat Badan:</strong> <%= setWeigth(data.Profile.weigth) %></p>
+        <p><strong>Tinggi Badan:</strong> <%= setHeigth(data.Profile.heigth) %></p>  
+        <a class="btn" href="/home/editProfile/<%= data.Profile.id %>">Edit</a>
+
+        <% } else { %>
+         <H1>Belum Ada Profil!</H1>
+         <a class="btn" href="/home/addProfile">Isi Profil</a>
+      <% } %>
     </section>
 
-    <!-- Catatan Harian -->
     <section class="notes">
-      <h2>Catatan Harian</h2>
-      <ul>
-        <li><strong>22 Oktober 2025:</strong> Olahraga pagi selama 30 menit.</li>
-        <li><strong>21 Oktober 2025:</strong> Makan siang sehat dengan salad dan ayam rebus.</li>
-        <li><strong>20 Oktober 2025:</strong> Tidur cukup 8 jam, bangun dengan segar.</li>
-      </ul>
+      <% if (data.HealthRecords.length) { %>
+        <h2>Catatan Harian</h2>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Tekanan Darah</th>
+              <th>Kadar Gula</th>
+              <th>Catatan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.HealthRecords.forEach(el => { %>
+              <tr>
+                <td><%= el.setDate %></td>
+                <td><%= el.setBloodPressure %></td>
+                <td><%= el.setSugarLevel %></td>
+                <td><%= el.note || '-' %></td>
+                <td>
+                  <a class="btn small" href="/healthrecords/<%= el.id %>/addNote">Tambah Catatan</a>
+                  <a class="btn small" href="/healthrecords/<%= el.id %>/delete">Hapus</a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+    
+        <div style="text-align:center; margin-top:20px;">
+          <a class="btn" href="/home/addHR">Tambahkan Health Record Baru</a>
+        </div>
+    
+      <% } else { %>
+        <h2>Belum Ada Catatan!</h2>
+        <a class="btn" href="/home/addHR">Tambahkan Health Record Baru</a>
+      <% } %>
     </section>
-
-    <!-- Tombol Navigasi -->
+    
     <section class="actions">
-      <a href="/healthrecords" class="btn">Lihat Health Record</a>
       <a href="/activities" class="btn">Lihat Activity</a>
+      <a href="/health-report" target="_blank" class="btn">Lihat Report</a>
+
     </section>
   </main>
 

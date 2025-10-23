@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Tracker - Add Activity</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #03A9F4;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .container {
+      width: 50%;
+      margin: 30px auto;
+    }
+
+    .form-card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .form-card h2 {
+      margin-top: 0;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .btn {
+      background-color: #03A9F4;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #43a047;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <h2>Admin</h2>
+    <h1>Tambah Aktivitas 🏃‍♂️</h1>
+    <nav>
+      <ul>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="form-card">
+      <h2>Form Tambah Aktivitas</h2>
+      <% if (errors) { %>
+        <% errors = errors.split(',') %>
+        <% errors.join("") %>
+        
+        <% errors.forEach(el => { %>
+         <h4 style="color: red; text-align: center;"><%= el %></h3> 
+        <% }) %>
+    <% } %>
+      <form action="/admin/<%= id %>" method="POST">
+        <div class="form-group">
+          <label>Judul Aktivitas</label>
+          <input type="text" name="name"  placeholder="Contoh: Jogging pagi">
+        </div>
+        <div class="form-group">
+          <label for="description">Calories Burned</label>
+          <input type="number" name="caloriesBurned" placeholder="Contoh : 100"></input>
+        </div>
+        <button type="submit" class="btn">Simpan Aktivitas</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>

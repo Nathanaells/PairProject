@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Health Record</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #03A9F4;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .container {
+      width: 50%;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 500;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .activity-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .activity-item {
+      background: #e3f2fd;
+      padding: 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .activity-item label {
+      cursor: pointer;
+      color: #333;
+    }
+
+    button {
+      background-color: #03A9F4;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0288d1;
+    }
+
+    .back-btn {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #03A9F4;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <h1>Tambah Health Record</h1>
+    <nav>
+      <ul>
+        <li><a href="/logout">Log Out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Masukkan Data Kesehatan</h2>
+    <% if (errors) { %>
+        <% errors = errors.split(',') %>
+        <% errors.join("") %>
+        
+        <% errors.forEach(el => { %>
+         <h4 style="color: red; text-align: center;"><%= el %></h3> 
+        <% }) %>
+    <% } %>
+    <form action="/home/addHR" method="POST">
+      <label for="date">Tanggal:</label>
+      <input type="date" id="date" name="date">
+
+      <label for="bloodPressure">Tekanan Darah (mmHg):</label>
+      <input type="number" name="bloodPressure">
+
+      <label for="sugarLevel">Kadar Gula Darah (mg/dL):</label>
+      <input type="number" name="sugarLevel">
+
+      <label for="note">Catatan Tambahan:</label>
+      <textarea name="note" placeholder="Tambahkan catatan (opsional)..."></textarea>
+
+      <div>
+        <label>Aktivitas yang Dilakukan:</label>
+        <div class="activity-list">
+          <% activities.forEach(activity => { %>
+            <div class="activity-item">
+              <input type="checkbox" name="activityIds[]" value="<%= activity.id %>" id="act-<%= activity.id %>">
+              <label for="act-<%= activity.id %>">
+                <%= activity.name %> <br>
+                <small><%= activity.caloriesBurned %> kcal</small>
+              </label>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <button type="submit">Simpan Catatan</button>
+    </form>
+
+    <a href="/home/<%= userId %>" class="back-btn">← Kembali</a>
+  </main>
+
+</body>
+</html>

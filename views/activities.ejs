@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Aktivitas</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #03A9F4;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .container {
+      width: 80%;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-container input[type="text"] {
+      padding: 8px 12px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .search-container button {
+      background-color: #03A9F4;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      margin-left: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .search-container button:hover {
+      background-color: #0288d1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #03A9F4;
+      color: white;
+      font-weight: 500;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+      background-color: #e3f2fd;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      color: #03A9F4;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border: 1px solid #03A9F4;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background-color: #03A9F4;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <h1>Daftar Aktivitas</h1>
+    <nav>
+      <ul>
+        <li><a href="/home/<%= userId %>">Home</a></li>
+        <li><a href="/logout">Log Out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Aktivitas yang Tersedia</h2>
+    <div class="search-container">
+      <form action="/activities" method="GET">
+        <input type="text" name="search" placeholder="Cari aktivitas...">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama Aktivitas</th>
+          <th>Total Kalori Terbakar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (data.length === 0) { %>
+          <tr>
+            <td colspan="3">Belum ada aktivitas</td>
+          </tr>
+        <% } else { %>
+          <% data.forEach(el => { %>
+            <tr>
+              <td><%= el.id %></td>
+              <td><%= el.name %></td>
+              <td><%= el.caloriesBurned %> kcal</td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+
+    <a href="/home/<%= userId %>" class="back-btn">← Kembali</a>
+  </main>
+
+</body>
+</html>

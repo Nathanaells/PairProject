@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tambah Catatan</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 400px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #03A9F4;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      outline: none;
+      resize: none;
+    }
+    textarea:focus {
+      border-color: #03A9F4;
+    }
+    button {
+      background-color: #03A9F4;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #0288d1;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: #03A9F4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Tambah Catatan</h2>
+    <% if (errors) { %>
+        <% errors = errors.split(',') %>
+        <% errors.join("") %>
+        
+        <% errors.forEach(el => { %>
+         <h4 style="color: red; text-align: center;"><%= el %></h3> 
+        <% }) %>
+    <% } %>
+    <form action="/healthrecords/<%= data.id %>/addNote" method="POST">
+
+      <label for="note">Catatan untuk tanggal <%= data.setDate %></label>
+      <textarea name="note"  placeholder="Tulis catatan di sini..."></textarea>
+      <button type="submit">Simpan Catatan</button>
+    </form>
+    <a href="/home/<%= data.userId %>">⬅ Kembali</a>
+  </div>
+</body>
+</html>

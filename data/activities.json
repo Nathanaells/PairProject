@@ -1,0 +1,23 @@
+[
+    {
+      "name": "Jogging",
+      "caloriesBurned": 200
+    },
+    {
+      "name": "Bersepeda",
+      "caloriesBurned": 250
+    },
+    {
+      "name": "Push Up",
+      "caloriesBurned": 150
+    },
+    {
+      "name": "Yoga",
+      "caloriesBurned": 120
+    },
+    {
+      "name": "Renang",
+      "caloriesBurned": 300
+    }
+  ]
+  

@@ -12,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+    static async findUser(id, HealthRecord, Profile){
+      return await User.findByPk(id, {
+        include: [HealthRecord, Profile]
+      });
+    }
     static associate(models) {
       User.hasOne(models.Profile, {foreignKey: "userId"})
       User.hasMany(models.HealthRecord, {foreignKey: "userId"})
@@ -66,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Role Required"
         },
         validateRole(value){
-          if(value !== "User" && value !== "Admin"){
+          if(value.toLowerCase() !== "user" && value.toLowerCase() !== "admin"){
             throw new Error("Role hanya User atau Admin")
           }
         }
@@ -80,6 +86,8 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeCreate(async (user) => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt)
+   
     })
   return User;
 };
+

@@ -21,9 +21,6 @@ module.exports = {
       note: {
         type: Sequelize.TEXT
       },
-      qrCodeUrl: {
-        type: Sequelize.STRING
-      },
       userId: {
         type: Sequelize.INTEGER
       },
