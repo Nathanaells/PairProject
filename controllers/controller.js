@@ -1,5 +1,4 @@
 const { User, Profile, HealthRecord, Activity } = require("../models");
-
 const PDFDocument = require("pdfkit");
 const QRCode = require("qrcode");
 const { setHeigth, setYear, setWeigth } = require("../helper/helper");
@@ -241,12 +240,8 @@ class Controller {
     try {
       const { userId } = req.session.user;
       const { date, bloodPressure, sugarLevel, note } = req.body;
-      console.log(req.body);
 
-      const idsRaw = req.body["activityIds[]"]; // ambil dari nama field
-
-      console.log(idsRaw, "iaudiawidaiwdguiagwidgaiwgdiawgd");
-
+      const idsRaw = req.body["activityIds[]"]; 
       const newHR = await HealthRecord.create({
         date,
         bloodPressure,
